@@ -40,6 +40,7 @@ public class Solution {
         books.add(new ConvertableBook("Third Book"));
 
         Map<String, ConvertableBook> bookMap = ConvertableUtil.convert(books);
+
         System.out.println(bookMap);
         //{Third Book=ConvertableBook{name='Third Book'},
         // First Book=ConvertableBook{name='First Book'},
