@@ -50,3 +50,5 @@ out/
 JavaRushHomeWork.iml
 TIJ4-code/
 .idea/
+.gitignore
+.gitattributes
