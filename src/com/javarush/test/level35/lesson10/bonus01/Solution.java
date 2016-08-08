@@ -67,7 +67,7 @@ public class Solution {
                         Class clazz = loader.loadClass(mName);
 
 
-                        /** Приняло без этого
+                        /** Приняло без этого, но по идее так правильнее.
                         boolean hasInterface = false;
 
                         Class[] interfaces = clazz.getInterfaces();
