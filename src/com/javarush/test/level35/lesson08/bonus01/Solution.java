@@ -18,7 +18,6 @@ ConvertableUser параметризирован Integer, т.е. ключ в р�
 
 Расставьте в методе ConvertableUtil.convert дженерик типы.
 */
-
 public class Solution {
     public static void main(String[] args) {
         List<ConvertableUser> users = new ArrayList<>();
@@ -40,7 +39,6 @@ public class Solution {
         books.add(new ConvertableBook("Third Book"));
 
         Map<String, ConvertableBook> bookMap = ConvertableUtil.convert(books);
-
         System.out.println(bookMap);
         //{Third Book=ConvertableBook{name='Third Book'},
         // First Book=ConvertableBook{name='First Book'},
