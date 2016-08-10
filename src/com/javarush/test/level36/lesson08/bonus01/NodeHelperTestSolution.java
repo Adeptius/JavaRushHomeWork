@@ -5,23 +5,20 @@ import java.lang.reflect.Field;
 public class NodeHelperTestSolution {
 
     public static void changeNode(String nodName, RedBlackTree tree, String fieldName, RedBlackTree.Node newValue) throws
-            Exception
-    {
+            Exception {
         RedBlackTree.Node header = getFromTreeNodeByName(nodName, tree);
         setNewNodeValue(fieldName, newValue, header);
     }
 
     public static void setNewNodeValue(String fieldName, RedBlackTree.Node newValue, RedBlackTree.Node node) throws
-            NoSuchFieldException, IllegalAccessException
-    {
+            NoSuchFieldException, IllegalAccessException {
         Field nodeField = node.getClass().getDeclaredField(fieldName);
         nodeField.setAccessible(true);
         nodeField.set(node, newValue);
     }
 
     public static RedBlackTree.Node getNodeValue(String fieldName, RedBlackTree.Node node) throws
-            NoSuchFieldException, IllegalAccessException
-    {
+            NoSuchFieldException, IllegalAccessException {
         Field nodeField = node.getClass().getDeclaredField(fieldName);
         nodeField.setAccessible(true);
         return (RedBlackTree.Node) nodeField.get(node);
@@ -29,8 +26,7 @@ public class NodeHelperTestSolution {
 
     public static RedBlackTree.Node getFromTreeNodeByName(String nodName, RedBlackTree tree) throws
             NoSuchFieldException,
-            IllegalAccessException
-    {
+            IllegalAccessException {
         Field headerField = RedBlackTree.class.getDeclaredField(nodName);
         headerField.setAccessible(true);
         return (RedBlackTree.Node) headerField.get(tree);
