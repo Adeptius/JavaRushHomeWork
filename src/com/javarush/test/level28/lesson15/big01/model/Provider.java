@@ -5,21 +5,25 @@ import com.javarush.test.level28.lesson15.big01.vo.Vacancy;
 import java.util.List;
 
 /**
- * Created by Владелец on 05.07.2016.
+ * Created by Golem765 on 13.04.2016.
  */
-public class Provider {
-
+public class Provider
+{
     private Strategy strategy;
 
-    public void setStrategy(Strategy strategy) {
+    public Provider(Strategy strategy)
+    {
         this.strategy = strategy;
     }
 
-    public Provider(Strategy strategy) {
+    public void setStrategy(Strategy strategy)
+    {
         this.strategy = strategy;
     }
 
-    public List<Vacancy> getJavaVacancies(String searchString){
-        return strategy.getVacancies(searchString);
+    public List<Vacancy> getJavaVacancies(String searchString)
+    {
+        List<Vacancy> retList = strategy.getVacancies(searchString);
+        return retList;
     }
 }

@@ -6,11 +6,10 @@ import com.javarush.test.level28.lesson15.big01.vo.Vacancy;
 import java.util.List;
 
 /**
- * Created by Владелец on 05.07.2016.
+ * Created by Golem765 on 14.04.2016.
  */
-public interface View {
-
+public interface View
+{
     void update(List<Vacancy> vacancies);
     void setController(Controller controller);
-
 }
