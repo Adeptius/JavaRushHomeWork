@@ -14,28 +14,6 @@ public class Solution {
     }
 
     public static Class getExpectedClass() {
-        Class<?>[] aClass = Collections.class.getDeclaredClasses(); // получили массив всех классов в Collections
-        for (int i = 0; i <aClass.length ; i++) {
-            Class[] interfases = aClass[i].getInterfaces(); // получили массив интерфейсов для каждого класса
-
-            for (int j = 0; j < interfases.length ; j++) {
-                if (interfases[j].getSimpleName().equals("List")) // если интерфейс класса == интерфейс LIST
-                    System.out.println(aClass[i].getSimpleName()); // выводим на экран название класса
-            }
-        }
-
-        return null; // Принимает только Collections.EMPTY_LIST.getClass();
+        return Collections.emptyList().getClass();
     }
 }
-
-/**
- *   try {
- Class clazz  = Class.forName(aClass[i].getName());
- Class<?>[] innerClasses = clazz.getDeclaredClasses();
- for (int k = 0; k < innerClasses.length; k++) {
- //System.out.println(innerClasses[k]);
- }
- } catch (ClassNotFoundException e) {
- e.printStackTrace();
- }
- */

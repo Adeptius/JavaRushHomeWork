@@ -9,34 +9,53 @@ import java.util.List;
 /**
  * Created by Владелец on 10.08.2016.
  */
-public class MainModel implements Model {
-
-    private UserService userService = new UserServiceImpl();
+public class MainModel implements Model
+{
     private ModelData modelData = new ModelData();
-
+    private UserService userService = new UserServiceImpl();
 
     @Override
-    public ModelData getModelData() {
+    public ModelData getModelData()
+    {
         return modelData;
     }
 
     @Override
-    public void loadUsers() {
-        List<User> users = userService.getUsersBetweenLevels(1, 100);
-        modelData.setUsers(users);
+    public void loadUsers()
+    {
         modelData.setDisplayDeletedUserList(false);
+        modelData.setUsers(getActiveUsers(userService.getUsersBetweenLevels(1, 100)));
     }
 
-    @Override
     public void loadDeletedUsers() {
+        modelData.setDisplayDeletedUserList(true);
         List<User> users = userService.getAllDeletedUsers();
         modelData.setUsers(users);
-        modelData.setDisplayDeletedUserList(true);
     }
 
     @Override
-    public void loadUserById(long userId) {
+    public void loadUserById(long userId)
+    {
         User user = userService.getUsersById(userId);
         modelData.setActiveUser(user);
     }
+    public void deleteUserById(long id)
+    {
+        userService.deleteUser(id);
+        modelData.setDisplayDeletedUserList(false);
+        modelData.setUsers(getActiveUsers(userService.getUsersBetweenLevels(1,100)));
+    }
+
+    @Override
+    public void changeUserData(String name, long id, int level)
+    {
+        userService.createOrUpdateUser(name, id, level);
+        modelData.setDisplayDeletedUserList(false);
+        modelData.setUsers(getActiveUsers(userService.getUsersBetweenLevels(1, 100)));
+    }
+
+    private List<User> getActiveUsers(List<User> userList){
+        return userService.filterOnlyActiveUsers(userList);
+    }
+
 }
