@@ -7,20 +7,27 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import java.awt.event.ActionEvent;
 
-public class SubscriptAction extends StyledEditorKit.StyledTextAction {
+/**
+ * Created by Leonid on 21.01.2016.
+ */
+public class SubscriptAction extends StyledEditorKit.StyledTextAction
+{
 
-    public SubscriptAction() {
+
+
+    public SubscriptAction()
+    {
         super(StyleConstants.Subscript.toString());
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        JEditorPane editor = getEditor(actionEvent);
-
+    public void actionPerformed(ActionEvent e)
+    {
+        JEditorPane editor = getEditor(e);
         if (editor != null) {
             MutableAttributeSet mutableAttributeSet = getStyledEditorKit(editor).getInputAttributes();
             SimpleAttributeSet simpleAttributeSet = new SimpleAttributeSet();
-            StyleConstants.setSubscript(mutableAttributeSet, !StyleConstants.isSubscript(mutableAttributeSet));
+            StyleConstants.setSubscript(simpleAttributeSet, !StyleConstants.isSubscript(mutableAttributeSet));
             setCharacterAttributes(editor, simpleAttributeSet, false);
         }
     }

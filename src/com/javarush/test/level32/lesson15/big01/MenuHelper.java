@@ -12,13 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class MenuHelper {
-
-    /**
-     * @param parent - меню в которое мы добавляем пункт
-     * @param text - текст добавляемого пункта
-     * @param actionListener - слушатель действий добавляемого пункта меню
-     * @return JMenuItem
-     */
     public static JMenuItem addMenuItem(JMenu parent, String text, ActionListener actionListener) {
         JMenuItem menuItem = new JMenuItem(text);
         menuItem.addActionListener(actionListener);
@@ -26,11 +19,6 @@ public class MenuHelper {
         return menuItem;
     }
 
-    /**
-     * @param parent - действие которое необходимо выполнить при выборе пункта меню
-     * @param action
-     * @return
-     */
     public static JMenuItem addMenuItem(JMenu parent, String text, Action action) {
         JMenuItem menuItem = addMenuItem(parent, action);
         menuItem.setText(text);
