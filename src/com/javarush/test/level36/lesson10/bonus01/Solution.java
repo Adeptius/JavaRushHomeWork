@@ -62,6 +62,7 @@ public class Solution {
         }
     }
 
+
     public HiddenClass getHiddenClassObjectByKey(String key) {
         for (Class clazz : hiddenClasses) {
             if (clazz.getSimpleName().toLowerCase().startsWith(key.toLowerCase())) {

@@ -14,6 +14,7 @@ public class Order
 {
     private Tablet tablet;
     private List<Dish> dishes;
+    private int totalCookingTime;
 
     public Order(Tablet tablet) throws IOException
     {
@@ -28,5 +29,13 @@ public class Order
             return "";
         else
             return "Your order: "+ dishes.toString() ;
+    }
+
+    public int getTotalCookingTime() {
+        return totalCookingTime;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
     }
 }

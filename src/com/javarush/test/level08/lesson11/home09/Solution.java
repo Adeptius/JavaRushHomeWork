@@ -14,6 +14,7 @@ JANUARY 1 2000 = true
 JANUARY 2 2020 = false
 */
 
+@SuppressWarnings("deprecation")
 public class Solution
 {
     public static void main(String[] args) throws ParseException

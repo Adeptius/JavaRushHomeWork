@@ -9,6 +9,7 @@ import java.util.*;
 
 public class Solution
 {
+    @SuppressWarnings("deprecation")
     public static HashMap<String, Date> createMap()
     {
         HashMap<String, Date> map = new HashMap<String, Date>();
@@ -25,6 +26,7 @@ public class Solution
         return map;
     }
 
+    @SuppressWarnings("deprecation")
     public static void removeAllSummerPeople(HashMap<String, Date> map)
     {
         Iterator<Map.Entry<String, Date>> temp = map.entrySet().iterator();

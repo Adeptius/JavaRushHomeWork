@@ -10,6 +10,7 @@ import java.util.List;
 В файле your_file_name.tmp может быть несколько объектов JavaRush
 Метод main реализован только для вас и не участвует в тестировании
 */
+@SuppressWarnings("deprecation")
 public class Solution {
     public static void main(String[] args) {
         //you can find your_file_name.tmp in your TMP directory or fix outputStream/inputStream according to your real file location
@@ -54,6 +55,7 @@ public class Solution {
     public static class JavaRush {
         public List<User> users = new ArrayList<>();
 
+        @SuppressWarnings("deprecation")
         public void save(OutputStream outputStream) throws Exception {
             PrintWriter writer = new PrintWriter(outputStream);
             writer.println(this.users.size());

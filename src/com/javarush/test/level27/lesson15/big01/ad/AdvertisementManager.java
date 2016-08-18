@@ -1,8 +1,6 @@
 package com.javarush.test.level27.lesson15.big01.ad;
 
-import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
 import com.javarush.test.level27.lesson15.big01.statistic.StatisticManager;
-import com.javarush.test.level27.lesson15.big01.statistic.event.NoAvailableVideoEventDataRow;
 import com.javarush.test.level27.lesson15.big01.statistic.event.VideoSelectedEventDataRow;
 
 import java.util.ArrayList;

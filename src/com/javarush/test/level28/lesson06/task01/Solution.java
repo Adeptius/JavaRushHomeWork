@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 4. допускаются все элементы включая null
 5. Исправьте строку List<String> list = null ... в методе main
 */
+@SuppressWarnings("deprecation")
 public class Solution {
     public static void main(String[] args) throws InterruptedException {
         Solution solution = new Solution();
