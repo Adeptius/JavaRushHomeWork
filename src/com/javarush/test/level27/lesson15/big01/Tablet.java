@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * Created by Владелец on 18.08.2016.
  */
 public class Tablet {
-
+//Написано в тестовой ветке
     public final int number;
     public static Logger logger = Logger.getLogger(Tablet.class.getName());
 
