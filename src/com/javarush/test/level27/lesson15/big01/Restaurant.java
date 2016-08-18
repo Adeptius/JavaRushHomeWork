@@ -1,7 +1,7 @@
 package com.javarush.test.level27.lesson15.big01;
 
 /**
- * Created by Владелец on 30.06.2016.
+ * Created by Владелец on 18.08.2016.
  */
 public class Restaurant {
 
@@ -9,5 +9,4 @@ public class Restaurant {
 
         new Tablet(5).createOrder();
     }
-
 }

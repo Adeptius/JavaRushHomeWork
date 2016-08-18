@@ -40,6 +40,10 @@ AM или PM: 1
 Секунды: 40
 */
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Solution {
     public static void main(String[] args) {
         printDate("21.4.2014 15:56:45");
@@ -50,6 +54,55 @@ public class Solution {
     }
 
     public static void printDate(String date) {
-        //напишите тут ваш код
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.M.yyyy HH:mm:ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("dd.M.yyyy");
+        SimpleDateFormat format3 = new SimpleDateFormat("HH:mm:ss");
+        StringBuilder result = new StringBuilder("");
+        try {
+            calendar.setTime(format1.parse(date));
+            result.append("День: " + calendar.get(Calendar.DAY_OF_MONTH)).append("\n");
+            result.append("День недели: " + calendar.get(Calendar.DAY_OF_WEEK)).append("\n");
+            result.append("День месяца: " + calendar.get(Calendar.DAY_OF_MONTH)).append("\n");
+            result.append("День года: " + calendar.get(Calendar.DAY_OF_YEAR)).append("\n");
+            result.append("Неделя месяца: " + calendar.get(Calendar.WEEK_OF_MONTH)).append("\n");
+            result.append("Неделя года: " + calendar.get(Calendar.WEEK_OF_YEAR)).append("\n");
+            result.append("Месяц: " + calendar.get(Calendar.MONTH)).append("\n");
+            result.append("Год: " + calendar.get(Calendar.YEAR)).append("\n");
+            result.append("Эра: " + calendar.get(Calendar.ERA)).append("\n");
+            result.append("AM или PM: " + calendar.get(Calendar.AM_PM)).append("\n");
+            result.append("Часы: " + calendar.get(Calendar.HOUR)).append("\n");
+            result.append("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY)).append("\n");
+            result.append("Минуты: " + calendar.get(Calendar.MINUTE)).append("\n");
+            result.append("Секунды: " + calendar.get(Calendar.SECOND));
+            System.out.print(result.toString());
+            return;
+        } catch (ParseException ignored) {}
+
+        try {
+            calendar.setTime(format2.parse(date));
+            result.append("День: " + calendar.get(Calendar.DAY_OF_MONTH)).append("\n");
+            result.append("День недели: " + calendar.get(Calendar.DAY_OF_WEEK)).append("\n");
+            result.append("День месяца: " + calendar.get(Calendar.DAY_OF_MONTH)).append("\n");
+            result.append("День года: " + calendar.get(Calendar.DAY_OF_YEAR)).append("\n");
+            result.append("Неделя месяца: " + calendar.get(Calendar.WEEK_OF_MONTH)).append("\n");
+            result.append("Неделя года: " + calendar.get(Calendar.WEEK_OF_YEAR)).append("\n");
+            result.append("Месяц: " + calendar.get(Calendar.MONTH)).append("\n");
+            result.append("Год: " + calendar.get(Calendar.YEAR)).append("\n");
+            result.append("Эра: " + calendar.get(Calendar.ERA)).append("\n");
+            System.out.print(result.toString());
+            return;
+        } catch (ParseException ignored) {}
+
+        try {
+            calendar.setTime(format3.parse(date));
+            result.append("AM или PM: " + calendar.get(Calendar.AM_PM)).append("\n");
+            result.append("Часы: " + calendar.get(Calendar.HOUR)).append("\n");
+            result.append("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY)).append("\n");
+            result.append("Минуты: " + calendar.get(Calendar.MINUTE)).append("\n");
+            result.append("Секунды: " + calendar.get(Calendar.SECOND));
+            System.out.print(result.toString());
+            return;
+        } catch (ParseException ignored) {}
     }
 }

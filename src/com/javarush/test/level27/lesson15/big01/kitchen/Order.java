@@ -6,36 +6,26 @@ import com.javarush.test.level27.lesson15.big01.Tablet;
 import java.io.IOException;
 import java.util.List;
 
-
 /**
- * Created by Владелец on 30.06.2016.
+ * Created by Владелец on 18.08.2016.
  */
-public class Order
-{
+public class Order {
+
     private Tablet tablet;
     private List<Dish> dishes;
-    private int totalCookingTime;
 
-    public Order(Tablet tablet) throws IOException
-    {
+    public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
         dishes = ConsoleHelper.getAllDishesForOrder();
     }
 
+
+
+
+
+
     @Override
-    public String toString()
-    {
-        if (dishes.isEmpty())
-            return "";
-        else
-            return "Your order: "+ dishes.toString() ;
-    }
-
-    public int getTotalCookingTime() {
-        return totalCookingTime;
-    }
-
-    public List<Dish> getDishes() {
-        return dishes;
+    public String toString() {
+        return dishes.isEmpty() ? "" : "Your order: " + dishes + " of " + tablet;
     }
 }
