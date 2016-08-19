@@ -3,10 +3,7 @@ package com.javarush.test.level27.lesson15.big01.ad;
 
 import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Владелец on 18.08.2016.
@@ -25,56 +22,112 @@ public class AdvertisementManager {
     }
 
     public void processVideos() throws NoVideoAvailableException {
-        List<Advertisement> bestVariant = new ArrayList<>();
-        bestVariant = pickVideosToList(null, null, timeSeconds, 0, bestVariant);
-        long totalAmount = 0;
-        int totalDuration = 0;
-        for (Advertisement ad : bestVariant) {
-            ConsoleHelper.writeMessage(String.format("%s is displaying... %d, %d", ad.getName(),
-                    ad.getAmountPerOneDisplaying(), ad.getAmountPerOneDisplaying() * 1000 / ad.getDuration()));
-            totalAmount += ad.getAmountPerOneDisplaying();
-            totalDuration += ad.getDuration();
-        }
-
-    }
-    private List<Advertisement> pickVideosToList(List<Advertisement> previousList, Advertisement previousAd, int remainingTime,
-                                                 long profit, List<Advertisement> bestResult) throws NoVideoAvailableException {
-        List<Advertisement> newList = new ArrayList<>();
-        if (previousList != null) {
-            newList.addAll(previousList);
-            remainingTime -= previousAd.getDuration();
-            profit += previousAd.getAmountPerOneDisplaying();
-            newList.add(previousAd);
-        }
-        for (Advertisement ad : videos) {
-            if (remainingTime == 0) break;
-            if (newList.contains(ad)) continue;
-            if (remainingTime >= ad.getDuration()) bestResult = pickVideosToList(newList, ad, remainingTime, profit, bestResult);
-        }
-        if (profit > maxProfit) {
-            maxProfit = profit;
-            minRemainingTime = remainingTime;
-            bestResult = newList;
-        } else if (profit == maxProfit && remainingTime < minRemainingTime) {
-            minRemainingTime = remainingTime;
-            bestResult = newList;
-        } else if (profit == maxProfit && remainingTime == minRemainingTime && bestResult.size() > newList.size())
-            bestResult = newList;
-        if (bestResult.isEmpty()) {
-
-            throw new NoVideoAvailableException();
-        }
-        Collections.sort(bestResult, new Comparator<Advertisement>() {
+        // Для хранения всех возможных сочетаний, создаем сортирующее множество
+        SortedSet<List<Advertisement>> set = new TreeSet<>(new Comparator<List<Advertisement>>() {
             @Override
-            public int compare(Advertisement o1, Advertisement o2) {
-                long pricePerVideoDiff = o2.getAmountPerOneDisplaying() - o1.getAmountPerOneDisplaying();
-                if (pricePerVideoDiff != 0)
-                    return (int) pricePerVideoDiff;
+            public int compare(List<Advertisement> o1, List<Advertisement> o2) {
+                long totalAmount1 = 0, totalAmount2 = 0;    // 1) сумма денег
+                long totalTime1 = 0, totalTime2 = 0;        // 4.1) суммарное время
+                int totalCount1 = 0, totalCount2 = 0;       // 4.2) количество Роликов
+
+                for (Advertisement ad : o1) {
+                    totalAmount1 += ad.getAmountPerOneDisplaying();
+                    totalTime1 += ad.getDuration();
+                }
+                totalCount1 = o1.size();
+
+                for (Advertisement ad : o2) {
+                    totalAmount2 += ad.getAmountPerOneDisplaying();
+                    totalTime2 += ad.getDuration();
+                }
+                totalCount2 = o2.size();
+
+                if (totalAmount1 != totalAmount2)
+                    return (int) (totalAmount1 - totalAmount2);
+                else if (totalTime1 != totalTime2)
+                    return (int) (totalTime1 - totalTime2);
+                else if (totalCount1 != totalCount2)
+                    return totalCount2 - totalCount1;
+                else if (o1.hashCode() > o2.hashCode())
+                    return 1;
                 else
-                    return (int) (o1.getAmountPerOneDisplaying() * 100 / o1.getDuration() - o2.getAmountPerOneDisplaying() * 100 / o2.getDuration());
+                    return -1;
             }
         });
-        return bestResult;
+
+        // Берем последнее сочетание - самое дорогое, максимально длинное, с меньшим к-вом роликов
+        List<Advertisement> selectedVideos = selector(new ArrayList<Advertisement>(), set);
+
+        if (selectedVideos.isEmpty())
+            throw new NoVideoAvailableException();
+
+        // сортируем выборку
+        Collections.sort(selectedVideos, new Comparator<Advertisement>() {
+            @Override
+            public int compare(Advertisement o1, Advertisement o2) {
+                if (o1.getAmountPerOneDisplaying() != o2.getAmountPerOneDisplaying())
+                    return (int) (o2.getAmountPerOneDisplaying() - o1.getAmountPerOneDisplaying());
+                else
+                    return (int) ((1000.0 * o1.getAmountPerOneDisplaying() / o1.getDuration())
+                            - (1000.0 * o2.getAmountPerOneDisplaying() / o2.getDuration()));
+
+            }
+        });
+
+        // выводим на экран
+        for (Advertisement video : selectedVideos) {
+            ConsoleHelper.writeMessage(video.getName() + " is displaying... "
+                    + video.getAmountPerOneDisplaying() + ", "
+                    + (1000 * video.getAmountPerOneDisplaying() / video.getDuration()));
+        }
+
+        // пересчитываем
+        for (Advertisement advertisement : selectedVideos) {
+            advertisement.revalidate();
+        }
+    }
+
+    // рекурсивная функция
+    private List<Advertisement> selector(List<Advertisement> selection, SortedSet<List<Advertisement>> set) {
+        boolean isAdded = false;
+
+        // находим время всей выборки
+        int timeSel = 0;
+        for (Advertisement advSel : selection) {
+            timeSel += advSel.getDuration();
+        }
+
+        // перебираем все ролики из общего списка
+        for (Advertisement adv : storage.list()) {
+            // если видео уже есть в выборке - пропускаем его
+            if (selection.contains(adv))                    // 3) не более одного за раз
+                continue;
+
+            // если превысим время готовки - пропускаем его
+            if (timeSel + adv.getDuration() > timeSeconds)  // 2) общее время
+                continue;
+
+            // если закончилось количество показов - пропускаем его
+            if (adv.getHits() <= 0)                         // 5) количество показов - положительное число
+                continue;
+
+            // если дошли до этого места, создаём новый список на основе текущего
+            // добавляем в него элемент
+            // вызываем новый селектор
+            // и ставим соответствующий флаг
+            List<Advertisement> list = new ArrayList<>(selection);
+            list.add(adv);
+            selector(list, set);
+            isAdded = true;
+        }
+
+        // если ничего добавлено не было, значит, в этой ветке дошли до конца
+        // (или всё добавлено, или исчерпан лимит времени)
+        // добавляем выборку во множество выборок
+        if (!isAdded)
+            set.add(selection);
+
+        return set.last();
     }
 
 }
