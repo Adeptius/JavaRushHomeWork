@@ -70,6 +70,7 @@ public class Server {
                             userName + ": " + message.getData());
                     sendBroadcastMessage(messageForAll);
                 } else ConsoleHelper.writeMessage("Ошибка");
+
             }
         }
     }
