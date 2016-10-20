@@ -11,7 +11,7 @@ public class Hippodrome {
     public static Hippodrome game;
 
     public void run(){
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 10; i++) {
             move();
             print();
             try {Thread.sleep(200);} catch (Exception e){}

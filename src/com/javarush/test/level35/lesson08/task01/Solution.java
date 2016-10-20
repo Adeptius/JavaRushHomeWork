@@ -3,6 +3,7 @@ package com.javarush.test.level35.lesson08.task01;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
 /* Wildcards
 Перепишите дженерики в методе add импользуя wildcards.
 Логику не меняйте.
@@ -17,7 +18,7 @@ public class Solution {
         for (int i = 0; i < sourceList.size(); i++) {
             destListIterator.add(srcListIterator.next());
         }
-}
+    }
 
     public static void main(String[] args) {
         List<B> destination = new ArrayList<>();
@@ -27,8 +28,6 @@ public class Solution {
         add(destination, source);
         System.out.println(destination);
         System.out.println(source);
-
-
     }
 
     static class A {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 
+@SuppressWarnings("Duplicates")
 public class Client {
 
     protected Connection connection;

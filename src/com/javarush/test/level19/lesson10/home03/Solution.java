@@ -28,6 +28,7 @@ import java.util.List;
 public class Solution {
     public static final List<Person> PEOPLE = new ArrayList<Person>();
 
+    @SuppressWarnings("deprecation")
     public static void main(String[] args) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0])));

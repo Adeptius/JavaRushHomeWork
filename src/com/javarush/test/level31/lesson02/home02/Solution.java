@@ -14,18 +14,18 @@ import java.util.Queue;
 */
 public class Solution {
 
-    public static List<String> getFileTree(String root) throws IOException {
-        Queue<String> queue = new LinkedList<>();
-        queue.add(root);
-        LinkedList<String> strings = new LinkedList<>();
-        while (!queue.isEmpty()){
-            File file = new File(queue.poll());
-            File[] files = file.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) queue.add(files[i].getAbsolutePath());
-                else strings.add(files[i].getAbsolutePath());
-            }
-        }
-        return strings;
-    }
+//    public static List<String> getFileTree(String root) throws IOException {
+//        Queue<String> queue = new LinkedList<>();
+//        queue.add(root);
+//        LinkedList<String> strings = new LinkedList<>();
+//        while (!queue.isEmpty()){
+//            File file = new File(queue.poll());
+//            File[] files = file.listFiles();
+//            for (int i = 0; i < files.length; i++) {
+//                if (files[i].isDirectory()) queue.add(files[i].getAbsolutePath());
+//                else strings.add(files[i].getAbsolutePath());
+//            }
+//        }
+//        return strings;
+//    }
 }

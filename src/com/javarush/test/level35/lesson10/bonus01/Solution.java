@@ -33,7 +33,6 @@ public class Solution {
                 if (!pathToAnimals.endsWith("/"))
                     pathToAnimals = pathToAnimals + "/";
             }
-            //System.out.println(pathToAnimals);
             File dir = new File(pathToAnimals);
 
             String[] modules = dir.list(new FilenameFilter() {
@@ -41,7 +40,6 @@ public class Solution {
                     return name.endsWith(".class");
                 }
             });
-            //System.out.println(Arrays.toString(modules));
             if (modules.length == 0) {
                 return result;
             }

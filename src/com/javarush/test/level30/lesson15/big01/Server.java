@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@SuppressWarnings("Duplicates")
 public class Server {
 
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();

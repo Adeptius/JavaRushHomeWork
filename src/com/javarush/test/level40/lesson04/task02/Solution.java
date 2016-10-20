@@ -23,7 +23,7 @@ import java.util.List;
 public class Solution {
     public static void main(String[] args) throws Exception {
         Solution solution = new Solution();
-        solution.sendPost("http://requestb.in/1h4qhvv1", "name=zapp&mood=good&locale=&id=777");
+        solution.sendPost("http://qainterview.cogniance.com", "name=zapp&position=JavaDeveloper");
     }
 
     public void sendPost(String url, String urlParameters) throws Exception {
